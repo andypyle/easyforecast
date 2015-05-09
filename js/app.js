@@ -20,6 +20,7 @@ app.controller('fcCtrl', function($scope, $q, $timeout, $http, $geolocation){
         timeout: 60000
     }).then(function() {
         $scope.geoStatus = true;
+        $scope.getCity();
         $scope.getWeather();
     }).catch(function() {
     	console.log('Error getting position! Make sure it is enabled in your browser settings.');
@@ -31,7 +32,7 @@ app.controller('fcCtrl', function($scope, $q, $timeout, $http, $geolocation){
             timeout: 60000
          });
 	
-	// Get current location.
+	// Function for retrieving current location coordinates.
 	$scope.getCoords = function(){
 		var myLat = $geolocation.position.coords.latitude;
 		var myLon = $geolocation.position.coords.longitude;
@@ -42,6 +43,7 @@ app.controller('fcCtrl', function($scope, $q, $timeout, $http, $geolocation){
 		return myCoords;
 	}	
 
+	// Request to get weather information from coordinates.
 	$scope.getWeather = function(){
 
 		var key = "afb3993d6126315791254532f5519d5b";
@@ -54,17 +56,67 @@ app.controller('fcCtrl', function($scope, $q, $timeout, $http, $geolocation){
 			}
 		})
 		.success(function(data){
-			$scope.weatherInfo = data;
+			$scope.weatherInfo = data;			
 		})
 		.error(function(){
 			console.log('error!');
+		})
+		.then(function(){
+			var isCloudy = $scope.weatherInfo.currently.cloudCover >= 0.3 ? true:false;
+			var isRaining = $scope.weatherInfo.currently.precipIntensity > 0 && $scope.weatherInfo.currently.precipType === 'rain' ? true:false;
+			var isSnowing = $scope.weatherInfo.currently.precipIntensity > 0 && $scope.weatherInfo.currently.precipType === 'snow' ? true:false;
+			var isClear = !isCloudy && !isRaining && !isSnowing ? true:false;
+
+			var images = {
+				'cloudy':'img/uncompressed/cloudy1.jpg',
+				'raining':'img/uncompressed/rain1.jpg',
+				'snowing':'img/uncompressed/snow1.jpg',
+				'clear':'img/uncompressed/clear1.jpg'
+			};
+
+			if(isCloudy){
+				$('body').css("backgroundImage","url(" + images.cloudy +")");
+			}
+			else if(isRaining){
+				$('body').css("backgroundImage","url(" + images.raining +")");
+			}
+			else if(isSnowing){
+				$('body').css("backgroundImage","url(" + images.snowing +")");
+			}
+			else if(isClear){
+				$('body').css("backgroundImage","url(" + images.clear +")");
+			}
+			//console.log(isCloudy + ' ' + isRaining + ' ' + isSnowing);
+		});
+	};
+
+	
+	
+	
+
+	//
+
+	// API Request to get city name from coordinates.
+	$scope.getCity = function(){
+
+		var geoKey = "AIzaSyBtgVTxB-l69vLQPwS-6NtOznCaVwmFkn4";
+		var geoUrl = "https://maps.googleapis.com/maps/api/geocode/json?result_type=intersection|locality|colloquial_area|postal_code";
+		
+		var geoReq = {
+			latlng : $scope.getCoords().lat + "," + $scope.getCoords().lon,
+			key : geoKey
+		};
+
+		$http({
+			method: 'GET',
+			url: geoUrl,
+			params: geoReq
+		})
+		.success(function(data){
+			$scope.cityName = data;
+		})
+		.error(function(){
+			console.log('Could not retrieve location information.');
 		});
 	};
 });
-
-/*
-Google Location api
-https://maps.googleapis.com/maps/api/geocode/json?latlng=LATITUDE,LONGITUDE&key=API_KEY
-
-API KEY = AIzaSyBtgVTxB-l69vLQPwS-6NtOznCaVwmFkn4
-*/

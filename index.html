@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body ng-app="easyForecast">
-
+<div class="bgOverlay"></div>
 	<header class="container">
 		<div class="row center-align">
 			<h1>EasyForecast</h1>
@@ -26,7 +26,7 @@
 	<main class="container-full" ng-controller="fcCtrl">
 		<section class="row">
 			<div class="col s12 center-align">
-				<p>{{ geoStatus ? 'Position acquired!':'Getting your position...' }}</p>
+				<h3 class="geoStatus">{{ geoStatus ? cityName.results[0].address_components[1].long_name + ", " + cityName.results[0].address_components[2].short_name :'Getting your position...' }}</h3>
 			</div>
 		</section>
 		<section class="row">			
@@ -34,10 +34,10 @@
 				<div class="forecast">
 					<div class="forecastDay" ng-repeat="eachDay in weatherInfo.daily.data">
 						<div class="forecastDayCol forecastDate">
-							{{ eachDay.time * 1000 | date:'MM-dd-yyyy' }}
+							{{ eachDay.time * 1000 | date:'EEE, MMMM d' }}
 						</div>
 						<div class="forecastDayCol">
-							ICON-{{ eachDay.icon }}
+							<ng-include src="'img/icons/' + eachDay.icon + '.svg'" class="forecastIcon"></ng-include>
 						<div class="forecastDayCol forecastSummary">
 							{{ eachDay.summary }}
 						</div>
