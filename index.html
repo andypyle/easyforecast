@@ -23,26 +23,30 @@
 		<div>
 	</header>
 
-	<main class="container-full cyan lighten-3" ng-controller="fcCtrl">
+	<main class="container-full" ng-controller="fcCtrl">
 		<section class="row">
-			<div class="col s12 center-align red lighten-4">
-				<a ng-click="showCoords()">Show coords</a>
-			</div>
-		</section>
-		<section class="row">
-			<div class="col s12 center-align green lighten-4">
+			<div class="col s12 center-align">
 				<p>{{ geoStatus ? 'Position acquired!':'Getting your position...' }}</p>
 			</div>
 		</section>
-		<section class="row">
-			{{  }}
-			
-			<table>
-				<tr ng-repeat="info in weatherInfo">
-					{{ info.daily.summary }}
-				</tr>
-			</table>
-			
+		<section class="row">			
+			<div class="col s12 center-align">
+				<div class="forecast">
+					<div class="forecastDay" ng-repeat="eachDay in weatherInfo.daily.data">
+						<div class="forecastDayCol forecastDate">
+							{{ eachDay.time * 1000 | date:'MM-dd-yyyy' }}
+						</div>
+						<div class="forecastDayCol">
+							ICON-{{ eachDay.icon }}
+						<div class="forecastDayCol forecastSummary">
+							{{ eachDay.summary }}
+						</div>
+						<div class="forecastDayCol forecastSummary">
+							{{ eachDay.precipType }}
+						</div>
+					</div>
+				</div>
+			</div>			
 		</section>
 	</main>
 	

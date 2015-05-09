@@ -1,0 +1,26 @@
+.forecast {
+	display: table;
+	margin: 0 auto;
+	padding: 3em;
+}
+
+.forecastDay {
+	display: table-cell;
+	width: 12.5%;
+	padding: .5em 1em;
+	font-weight: 700;
+}
+
+.forecastDayCol {
+	display: table-row;
+	text-align: center;
+}
+
+.forecastDate {
+	font-weight: 700;
+}
+
+.forecastSummary {
+	font-weight: 300;
+	font-size: .85em;
+}

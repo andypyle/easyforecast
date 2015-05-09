@@ -61,3 +61,10 @@ app.controller('fcCtrl', function($scope, $q, $timeout, $http, $geolocation){
 		});
 	};
 });
+
+/*
+Google Location api
+https://maps.googleapis.com/maps/api/geocode/json?latlng=LATITUDE,LONGITUDE&key=API_KEY
+
+API KEY = AIzaSyBtgVTxB-l69vLQPwS-6NtOznCaVwmFkn4
+*/
