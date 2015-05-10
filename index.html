@@ -29,7 +29,7 @@
 	<main class="container-full" ng-controller="fcCtrl">
 		<section class="container">
 			<div class="row currently">
-				<div class="col s3 center-align">
+				<div class="col s4 m3 center-align">
 					<span class="loadingText velocity-transition-fadeIn" data-velocity-opts="{ stagger: 100 }"  ng-show="!weatherInfo.currently.icon">
 						Loading icon...
 					</span>
@@ -37,7 +37,7 @@
 						<i class="currentlyIcon {{ 'wi ' + icon.wiclass }}"></i>
 					</span>
 				</div>
-				<div class="col s9 velocity-transition-fadeIn" data-velocity-opts="{ stagger: 500, duration: 2000 }" ng-show="geoStatus">
+				<div class="col s8 m9 velocity-transition-fadeIn" data-velocity-opts="{ stagger: 500, duration: 2000 }" ng-show="geoStatus">
 					<div class="row">
 						<div class="col s12">
 							<h2>{{ geoStatus ? cityName.results[0].formatted_address :'Getting your position...' }}</h2>
@@ -63,7 +63,7 @@
 			</div>
 			<div class="row currently hide-on-med-and-up">
 				<div class="col s12">
-					<div class="row">
+					<div class="row currentConditions">
 						<div class="col s12 center-align currentlyLabel">
 							<a ng-click="showConditions()" class="curConditionsMobile">Conditions 
 								<i ng-class="{'fa fa-plus':!curConditions, 'fa fa-minus':curConditions}" class="right-align"></i>
