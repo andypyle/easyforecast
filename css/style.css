@@ -2,13 +2,15 @@ body {
 	background-image: url('../img/uncompressed/clear1.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
 	color: #FFF;
 }
 
 .bgOverlay {
 	background-color: rgba(0,0,0,0.45);
 	display: block;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -17,52 +19,114 @@ body {
 	height: 100%;
 }
 
+
+
+header {
+	margin: 0;
+	padding: 0;
+}
+
 header h1 {
-	padding:0;
-	line-height: 1em;
+	padding: .25em;
+	margin: 0;
 	font-weight: 700;
+}
+
+.transparentText {
+	color: rgba(255,255,255,0.4);
+}
+
+.currently span {
+	display: block;
+}
+
+.currentlyLabel > span {
+	font-weight: 700;
+	font-size: 1.45em;
+}
+
+.currentlyText {
+	font-weight: 300;
+	font-size: 1.45em;
 }
 
 .geoStatus {
 	padding: 0;
-	line-height: 0;
 	margin: 0;
 	font-weight: 300;
+	font-size: 2.25em;
 }
 .forecast {
-	display: table;
-	margin: 0 auto;
-	padding: 3em;
+	display: -webkit-box;
+  	display: -ms-flexbox;
+  	display: -webkit-flex;
+  	display: flex;
+  	flex-direction: row;
 }
 
-.forecastDay {
-	display: table-cell;
-	width: 12.5%;
-	padding: 1em 1em;
-	font-weight: 700;
+.forecast .day {
+	flex-grow: 1;
 }
 
-.forecastDay + .forecastDay {
-	border-left: 1px dotted rgba(255,255,255,0.35);
-}
-
-.forecastDayCol {
-	display: table-row;
-	text-align: center;
-}
-
-.forecastDate {
-	font-weight: 700;
+.forecastIconBox {	
+	padding: 0;
 }
 
 .forecastIcon {
 	fill: #FFFFFF;
-	width: 100%;
-	height: 100%;
-	display:block;
+	margin: -25%;
+	line-height: 0;
 }
 
-.forecastSummary {
-	font-weight: 300;
-	font-size: .85em;
+.forecastIcon svg {
+	width: 80%;
+	height: 80%;
+	position: relative;
+}
+
+svg path {
+	stroke: black;
+	stroke-opacity: .1;
+	viewBox: 0px 0px 250px 250px;
+}
+
+@media screen and (max-width:600px){
+	.forecast {
+		display: block;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+	}
+
+	.forecast .day {
+		display: block;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		border: 1px solid blue;
+	}
+
+	.forecast .day .time,
+	.forecast .day .icon,
+	.forecast .day .summary,
+	.forecast .day .preipitation {
+		display: inline-block;
+		width: 20%;
+		border: 1px solid yellow;
+	}
+
+	.forecast .day .icon {
+	}
+
+	.forecast .day .summary {
+
+	}
+
+	.forecast .day .precipitation {
+
+	}
+
+	.forecastIconBox {	
+		padding: 0;
+	}
 }

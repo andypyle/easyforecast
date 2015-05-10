@@ -16,8 +16,8 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body ng-app="easyForecast">
-
-	<header class="container">
+<div class="bgOverlay"></div>
+	<header class="container-full">
 		<div class="row center-align">
 			<h1>EasyForecast</h1>
 		<div>
@@ -25,16 +25,57 @@
 
 	<main class="container-full" ng-controller="fcCtrl">
 		<section class="row">
-			<div class="col s12 center-align">
-				<h3>{{ geoStatus ? cityName.results[0].address_components[1].long_name + ", " + cityName.results[0].address_components[2].short_name :'Getting your position...' }}</h3>
+			<div class="col s3 right-align forecastIconBox">
+				<div class="loadingGeostatus center-align" ng-show="!geoStatus">
+					<p class="transparentText">Loading icon...</p>
+				</div>
+				<div ng-include="'img/icons/' + weatherInfo.currently.icon + '.svg'" class="forecastIcon"></div>
 			</div>
+			<div class="col s9 left-align">
+				<div class="col s12 currently">
+					<div class="row">
+						<div class="col s12">
+							<h3 class="geoStatus">{{ geoStatus ? cityName.results[0].formatted_address :'Getting your position...' }}</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s2 currentlyLabel right-align">
+							<span>Currently:</span>
+						</div>
+						<div class="col s10 currentlyText">
+							<span>{{ weatherInfo.currently.summary }}, around {{ weatherInfo.currently.temperature | number:0 }}&deg;F</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s2 currentlyLabel right-align">
+							<span>This Week:</span>
+						</div>
+						<div class="col s10 currentlyText">
+							<span>{{ weatherInfo.daily.summary }}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</section>
 		<section class="row">			
 			<div class="col s12 center-align">
-				<div class="forecast">
-					{{weatherInfo.currently.summary}}
+				<div class="forecast row">
+					<div class="day" ng-repeat="eachDay in weatherInfo.daily.data">
+						<div class="time">
+							{{ eachDay.time * 1000 | date:'EEE, MMMM d' }}
+						</div>
+						<div class="icon">
+							<ng-include src="'img/icons/' + eachDay.icon + '.svg'" class="forecastIcon"></ng-include>
+						<div class="summary">
+							{{ eachDay.summary }}
+						</div>
+						<div class="precipitation">
+							{{ eachDay.precipType }}
+						</div>
+					</div>
 				</div>
-			</div>			
+			</div>
 		</section>
 	</main>
 	
