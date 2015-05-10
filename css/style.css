@@ -2,14 +2,35 @@ body {
 	background-image: url('../img/clear1.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: center bottom;
 	background-attachment: fixed;
+	background-blend-mode: luminosity;
 	color: #FFF;
+	transition: background-color .5s ease-in-out;
+}
 
+.current-clear {
+	background-color: rgba(240,236,30,.25);
+	transition: background-color .5s ease-in-out;
+}
+
+.current-cloudy {
+	background-color: rgba(255,210,252,.45);
+	transition: background-color .5s ease-in-out;
+}
+
+.current-rain {
+	background-color: rgba(68,69,84,.45);
+	transition: background-color .5s ease-in-out;
+}
+
+.current-snow {
+	background-color: rgba(163,210,255,.25);
+	transition: background-color .5s ease-in-out;
 }
 
 .bgOverlay {
-	background-color: rgba(0,0,0,0.38);
+	background-color: rgba(0,0,0,0.23);
 	display: block;
 	position: fixed;
 	top: 0;
@@ -36,6 +57,7 @@ header div h1 {
 		font-weight: 700;
 		padding: 0;
 		margin: 0;
+		padding-bottom: .5em;
 
 	}
 }
@@ -47,6 +69,10 @@ header div h1 {
 	margin: 0;
 	padding: 0;
 	line-height: 1em;
+}
+
+.loadingText {
+	color: rgba(255,255,255,0.25);
 }
 
 .currently span {
@@ -123,7 +149,7 @@ header div h1 {
 }
 
 .forecast .day {
-	display: inline-block;
+	display: inline-block !important;
 	width: 12.5%;
 	padding: .75em;
 	font-size: 1.25em;

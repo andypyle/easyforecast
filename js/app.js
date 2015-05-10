@@ -1,4 +1,4 @@
-var app = angular.module('easyForecast', ['ngGeolocation']);
+var app = angular.module('easyForecast', ['ngAnimate', 'angular-velocity', 'ngGeolocation']);
 
 app.config(function($httpProvider){
 	$httpProvider.defaults.useXDomain = true;
@@ -121,15 +121,19 @@ app.controller('fcCtrl', function($scope, $q, $timeout, $http, $geolocation){
 
 			if(isCloudy){
 				$('body').css("backgroundImage","url(" + images.cloudy +")");
+				$('body').removeClass('current-clear current-rain current-snow').addClass('current-cloudy');
 			}
 			else if(isRaining){
 				$('body').css("backgroundImage","url(" + images.raining +")");
+				$('body').removeClass('current-clear current-cloudy current-snow').addClass('current-rain');
 			}
 			else if(isSnowing){
 				$('body').css("backgroundImage","url(" + images.snowing +")");
+				$('body').removeClass('current-clear current-rain current-cloudy').addClass('current-snow');
 			}
 			else if(isClear){
 				$('body').css("backgroundImage","url(" + images.clear +")");
+				$('body').removeClass('current-cloudy current-rain current-snow').addClass('current-clear');
 			}
 			//console.log(isCloudy + ' ' + isRaining + ' ' + isSnowing);
 		});
