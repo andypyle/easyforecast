@@ -113,10 +113,10 @@ app.controller('fcCtrl', function($scope, $q, $timeout, $http, $geolocation){
 			var isClear = !isCloudy && !isRaining && !isSnowing ? true:false;
 
 			var images = {
-				'cloudy':'img/uncompressed/cloudy1.jpg',
-				'raining':'img/uncompressed/rain1.jpg',
-				'snowing':'img/uncompressed/snow1.jpg',
-				'clear':'img/uncompressed/clear1.jpg'
+				'cloudy':'img/cloudy1.jpg',
+				'raining':'img/rain1.jpg',
+				'snowing':'img/snow1.jpg',
+				'clear':'img/clear1.jpg'
 			};
 
 			if(isCloudy){
