@@ -12,41 +12,99 @@
 	<!-- - FontAwesome CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
+	<!-- - WeatherIcons CSS -->
+	<link rel="stylesheet" href="css/weathericons/weather-icons.min.css">
+
 	<!-- My CSS -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style2.css">
 </head>
 <body ng-app="easyForecast">
 <div class="bgOverlay"></div>
-	<header class="container">
-		<div class="row center-align">
+	<header class="container-full">
+		<div class="col s12 center-align">
 			<h1>EasyForecast</h1>
 		<div>
 	</header>
 
 	<main class="container-full" ng-controller="fcCtrl">
-		<section class="row">
-			<div class="col s12 center-align">
-				<h3 class="geoStatus">{{ geoStatus ? cityName.results[0].address_components[1].long_name + ", " + cityName.results[0].address_components[2].short_name :'Getting your position...' }}</h3>
-			</div>
-		</section>
-		<section class="row">			
-			<div class="col s12 center-align">
-				<div class="forecast">
-					<div class="forecastDay" ng-repeat="eachDay in weatherInfo.daily.data">
-						<div class="forecastDayCol forecastDate">
-							{{ eachDay.time * 1000 | date:'EEE, MMMM d' }}
-						</div>
-						<div class="forecastDayCol">
-							<ng-include src="'img/icons/' + eachDay.icon + '.svg'" class="forecastIcon"></ng-include>
-						<div class="forecastDayCol forecastSummary">
-							{{ eachDay.summary }}
-						</div>
-						<div class="forecastDayCol forecastSummary">
-							{{ eachDay.precipType }}
+		<section class="container">
+			<div class="row currently">
+				<div class="col s3 center-align">
+					<span class="currentIcon" ng-repeat="icon in weatherIcons" ng-show="icon.text == weatherInfo.currently.icon">
+						<i class="currentlyIcon {{ 'wi ' + icon.wiclass }}"></i>
+					</span>
+				</div>
+				<div class="col s9">
+					<div class="row">
+						<div class="col s12">
+							<h2>{{ geoStatus ? cityName.results[0].formatted_address :'Getting your position...' }}</h2>
 						</div>
 					</div>
+					<div class="row hide-on-small-only">
+						<span class="col s3 right-align currentlyLabel">
+							Currently:
+						</span>
+						<span class="col s9 left-align">
+							{{ weatherInfo.currently.summary }}, around {{ weatherInfo.currently.temperature | number:0 }}&deg;F
+						</span>
+					</div>
+					<div class="row hide-on-small-only">
+						<span class="col s3 right-align currentlyLabel">
+							This Week:
+						</span>
+						<span class="col s9 left-align">
+							{{ weatherInfo.daily.summary }}
+						</span>
+					</div>
 				</div>
-			</div>			
+			</div>
+			<div class="row currently hide-on-med-and-up">
+				<div class="col s12">
+					<div class="row">
+						<div class="col s12 center-align currentlyLabel">
+							<a ng-click="showConditions()" class="curConditionsMobile">Conditions <i class="fa fa-plus right-align"></i></a>
+						</div>						
+					</div>
+					<div class="row" ng-show="curConditions">
+						<span class="col s3 right-align currentlyLabel">
+							Current:
+						</span>
+						<span class="col s9 left-align currentlyText">
+							{{ weatherInfo.currently.summary }}, around {{ weatherInfo.currently.temperature | number:0 }}&deg;F
+						</span>
+						<span class="col s3 right-align currentlyLabel">
+							This Week:
+						</span>
+						<span class="col s9 left-align">
+							{{ weatherInfo.daily.summary }}
+						</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="container-full">
+			<div class="row">
+				<div class="col s12 center-align outerForecast">
+					<ul class="forecast">
+						<li class="day" ng-repeat="eachDay in weatherInfo.daily.data">
+							<div class="date">
+								{{ eachDay.time * 1000 | date:'EEE, MMMM d' }}
+							</div>
+							<div class="icon">
+								<span class="forecastIcon" ng-repeat="icon in weatherIcons" ng-show="icon.text == eachDay.icon">
+									<i class="dailyIcon {{ 'wi ' + icon.wiclass }}"></i>
+								</span>
+							</div>
+							<div class="highlow">
+								<span><i class="wi wi-up"></i> {{ eachDay.temperatureMax | number:0 }}</span>
+								<span><i class="wi wi-down"></i> {{ eachDay.temperatureMin | number:0 }}</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+				
+			</div>
 		</section>
 	</main>
 	

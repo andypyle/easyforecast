@@ -13,6 +13,51 @@ app.controller('fcCtrl', function($scope, $q, $timeout, $http, $geolocation){
 		});
 	}
 
+
+	// Icons object. Associates a class with the returned icon value in getWeather().
+	$scope.weatherIcons = [
+		{
+			text: 'clear-day',
+			wiclass: 'wi-day-sunny'
+		},
+		{
+			text: 'clear-night',
+			wiclass: 'wi-night-clear'
+		},
+		{
+			text: 'rain',
+			wiclass: 'wi-rain'
+		},
+		{
+			text: 'snow',
+			wiclass: 'wi-snow'
+		},
+		{
+			text: 'sleet',
+			wiclass: 'wi-sleet'
+		},
+		{
+			text: 'wind',
+			wiclass: 'wi-windy'
+		},
+		{
+			text: 'fog',
+			wiclass: 'wi-fog'
+		},
+		{
+			text: 'cloudy',
+			wiclass: 'wi-cloudy'
+		},
+		{
+			text: 'partly-cloudy-day',
+			wiclass: 'wi-day-cloudy'
+		},
+		{
+			text: 'partly-cloudy-night',
+			wiclass: 'wi-night-alt-cloudy'
+		}
+	];
+
 	$scope.geoStatus = false;
 
 	// Get current position.
@@ -119,4 +164,15 @@ app.controller('fcCtrl', function($scope, $q, $timeout, $http, $geolocation){
 			console.log('Could not retrieve location information.');
 		});
 	};
+
+	
+
+	$scope.showConditions = function(){
+		if($scope.curConditions){
+			$scope.curConditions = false;
+		} else {
+			$scope.curConditions = true;
+		}
+		return $scope.curConditions;
+	}
 });
