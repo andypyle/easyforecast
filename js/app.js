@@ -116,7 +116,7 @@ app.controller('fcCtrl', function($scope, $q, $timeout, $http, $geolocation){
 				'cloudy':'img/cloudy1.jpg',
 				'raining':'img/rain1.jpg',
 				'snowing':'img/snow1.jpg',
-				'clear':'img/clear1.jpg'
+				'clearimg':'img/clear1.jpg'
 			};
 
 			if(isCloudy){
@@ -132,7 +132,7 @@ app.controller('fcCtrl', function($scope, $q, $timeout, $http, $geolocation){
 				$('body').removeClass('current-clear current-rain current-cloudy').addClass('current-snow');
 			}
 			else if(isClear){
-				$('body').css("backgroundImage","url(" + images.clear +")");
+				$('body').css("backgroundImage","url(" + images.clearimg +")");
 				$('body').removeClass('current-cloudy current-rain current-snow').addClass('current-clear');
 			}
 			//console.log(isCloudy + ' ' + isRaining + ' ' + isSnowing);

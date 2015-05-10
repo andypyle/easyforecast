@@ -4,7 +4,6 @@ body {
 	background-repeat: no-repeat;
 	background-position: center bottom;
 	background-attachment: fixed;
-	-webkit-background-blend-mode: luminosity;
 	background-blend-mode: luminosity;
 	color: #FFF;
 	transition: background-color .5s ease-in-out;
@@ -31,7 +30,7 @@ body {
 }
 
 .bgOverlay {
-	background-color: rgba(0,0,0,0.23);
+	background-color: rgba(0,0,0,0.22);
 	display: block;
 	position: fixed;
 	top: 0;
@@ -54,7 +53,7 @@ header div h1 {
 
 @media only screen and (max-width:600px){
 	header div h1 {
-		font-size: 2.5em;
+		font-size: 3.5em;
 		font-weight: 700;
 		padding: 0;
 		margin: 0;
